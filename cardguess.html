@@ -1,5 +1,6 @@
 <script>
-    var suitnames = ['Hearts', 'Diamonds', 'Spades', 'Clubs']
+    var suitnames = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
+    var numbers = ['Ace', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King']
     function Deck() { 
         this.cards = [];
         this.count = function() {
@@ -19,7 +20,7 @@
         this.rank = rank;
         this.suit = suit;
             this.show = function() {
-                console.log(this.rank + " of " + suitnames[this.suit - 1]);
+                console.log(numbers[this.rank - 1] + " of " + suitnames[this.suit - 1]);
             }
     }
 
