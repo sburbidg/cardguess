@@ -1,30 +1,37 @@
 <script>
-    var suitnames = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
-    var numbers = ['Ace', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King']
-    function Deck() { 
-        this.cards = [];
-        this.count = function() {
-            this.cards.length;
-        }
-        this.init = function() {
-            for (s =  1; s <= 4; s++) {
-                for (r = 1; r <= 13; r++) 
-                {
-                this.cards.push(new Card(r, s))
-                }       
-            }
-        }
-    }
- 
-    function Card(rank, suit) {
-        this.rank = rank;
-        this.suit = suit;
-            this.show = function() {
-                console.log(numbers[this.rank - 1] + " of " + suitnames[this.suit - 1]);
-            }
-    }
-
   var d = new Deck();
+  var suitnames = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
+  var numbers = ['Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace']
+  
+  function Deck() { 
+    this.cards = [];
+    this.count = function() {
+        this.cards.length;
+    }
+    this.init = function() {
+      for (r =  1; r <= 13; r++) {
+        for (s = 1; s <= 4; s++) 
+        {this.cards.push(new Card(s, r))
+        }       
+      }
+    }
+  }
+
+  function Card(suit, rank) {
+    this.rank = rank;
+    this.suit = suit;
+        this.show = function() {
+            alert('You pulled a ' + numbers[this.rank - 1] + " of " + suitnames[this.suit - 1]);
+        }
+  }
+  alert('Pull a card, if it is a face card I will give you a castle') 
   d.init();
-  d.cards[Math.floor(Math.random() * 52)].show()
+  var pulled = d.cards[Math.floor(Math.random() * 52)]
+  pulled.show()
+  var facecards = d.cards.slice(35, 52)
+    if(facecards.indexOf(pulled) != -1) {alert('Yay, here is your castle!')
+    } else {alert('Looks like you must die')
+    }
+   
+
 </script>
