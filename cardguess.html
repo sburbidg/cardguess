@@ -1,7 +1,7 @@
 <script>
   var d = new Deck();
   var suitnames = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
-  var numbers = ['Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace']
+  var numbers = ['Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace'] 
   
   function Deck() { 
     this.cards = [];
@@ -15,6 +15,15 @@
         }       
       }
     }
+    this.shuffle = function(){
+      var copy = [], n = this.cards.length, rand, take;
+      while (n) {
+        rand = Math.floor(Math.random() * n--)
+        take = this.cards.splice(rand, 1)[0] 
+        copy.push(take);
+      }
+      return this.cards = copy
+    }
   }
 
   function Card(suit, rank) {
@@ -23,10 +32,14 @@
         this.show = function() {
             alert('You pulled a ' + numbers[this.rank - 1] + " of " + suitnames[this.suit - 1]);
         }
+             
   }
-  alert('Pull a card, if it is a face card I will give you a castle') 
+
   d.init();
- 
+  d.cards[Math.floor(Math.random() * 52)]
+  d.cards
+  console.log(d.shuffle())
+
    
 
 </script>
