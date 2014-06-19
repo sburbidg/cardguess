@@ -23,6 +23,29 @@
         copy.push(take);
       }
       return this.cards = copy
+    }  
+    this.deal = function() {
+      var playerOne = [], playerTwo = [], midDeck, oneDeal, twoDeal
+      midDeck = this.cards.length / 2
+      oneDeal = this.cards.splice(0, midDeck) 
+      twoDeal = this.cards.splice(midDeck + 1, 52)
+      playerOne.push(oneDeal) 
+      playerTwo.push(twoDeal)
+        
+          if(oneDeal.length){
+          oneDeal = this.cards.splice(0, midDeck)[0] 
+          playerOne.push(oneDeal)
+          }        
+        
+        return this.cards = playerOne;
+        
+        if(twoDeal.length) {
+            twoDeal = this.cards.splice(midDeck + 1, 52)[0] 
+            playerTwo.push(twoDeal)
+          }
+          return this.cards = playerTwo;
+         
+        
     }
   }
 
@@ -34,11 +57,14 @@
         }
              
   }
+  
 
   d.init();
-  d.cards[Math.floor(Math.random() * 52)]
-  d.cards
+  //d.cards[Math.floor(Math.random() * 52)]
   console.log(d.shuffle())
+  d.cards
+  
+
 
    
 
