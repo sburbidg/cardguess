@@ -24,30 +24,22 @@
       }
       return this.cards = copy
     }  
-    this.deal = function() {
-      var playerOne = [], playerTwo = [], midDeck, oneDeal, twoDeal
+    this.dealOne = function() {
+      var playerOne = [], midDeck, oneDeal
       midDeck = this.cards.length / 2
-      oneDeal = this.cards.splice(0, midDeck) 
-      twoDeal = this.cards.splice(midDeck + 1, 52)
-      playerOne.push(oneDeal) 
-      playerTwo.push(twoDeal)
-        
-          if(oneDeal.length){
-          oneDeal = this.cards.splice(0, midDeck)[0] 
-          playerOne.push(oneDeal)
-          }        
-        
-        return this.cards = playerOne;
-        
-        if(twoDeal.length) {
-            twoDeal = this.cards.splice(midDeck + 1, 52)[0] 
-            playerTwo.push(twoDeal)
-          }
-          return this.cards = playerTwo;
-         
-        
+      oneDeal = this.cards.slice(0, midDeck)
+      return oneDeal
+    }
+     
+    this.dealTwo = function() {
+      var playerTwo = [], midDeck, twoDeal
+      midDeck = this.cards.length / 2
+      twoDeal = this.cards.slice(midDeck, 52)
+      return twoDeal  
+
     }
   }
+  
 
   function Card(suit, rank) {
     this.rank = rank;
@@ -55,14 +47,16 @@
         this.show = function() {
             alert('You pulled a ' + numbers[this.rank - 1] + " of " + suitnames[this.suit - 1]);
         }
-             
-  }
+  }           
+  
   
 
   d.init();
   //d.cards[Math.floor(Math.random() * 52)]
   console.log(d.shuffle())
   d.cards
+  var playerOne = d.dealOne()
+  var playerTwo = d.dealTwo()
   
 
 
