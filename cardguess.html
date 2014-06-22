@@ -1,5 +1,4 @@
 <script>
-  var d = new Deck();
   var suitnames = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
   var numbers = ['Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace'] 
   
@@ -8,13 +7,16 @@
     this.count = function() {
         this.cards.length;
     }
+    
     this.init = function() {
       for (r =  1; r <= 13; r++) {
         for (s = 1; s <= 4; s++) 
         {this.cards.push(new Card(s, r))
         }       
       }
+      this.shuffle()
     }
+
     this.shuffle = function(){
       var copy = [], n = this.cards.length, rand, take;
       while (n) {
@@ -23,21 +25,7 @@
         copy.push(take);
       }
       return this.cards = copy
-    }  
-    this.dealOne = function() {
-      var playerOne = [], midDeck, oneDeal
-      midDeck = this.cards.length / 2
-      oneDeal = this.cards.slice(0, midDeck)
-      return oneDeal
-    }
-     
-    this.dealTwo = function() {
-      var playerTwo = [], midDeck, twoDeal
-      midDeck = this.cards.length / 2
-      twoDeal = this.cards.slice(midDeck, 52)
-      return twoDeal  
-
-    }
+    } 
   }
   
 
@@ -45,18 +33,87 @@
     this.rank = rank;
     this.suit = suit;
         this.show = function() {
-            alert('You pulled a ' + numbers[this.rank - 1] + " of " + suitnames[this.suit - 1]);
+            alert('You pulled a ' + numbers[this.rank - 1] + " of " + suitnames[this.suit - 1]);  
         }
+    this.label = function() {return numbers[this.rank - 1] + " of " + suitnames[this.suit - 1] 
+    }    
   }           
+ 
   
+  function War(deck) {
+
+    
+    this.dealOne = function(deck) {
+      var midDeck, oneDeal
+      midDeck = deck.cards.length / 2
+      oneDeal = deck.cards.slice(0, midDeck)
+      return oneDeal
+    }
+  
+    this.dealTwo = function(deck) {
+      var playerTwo = [], midDeck, twoDeal
+      midDeck = deck.cards.length / 2
+      twoDeal = deck.cards.slice(midDeck, 52)
+      return twoDeal 
+    }
+
+    this.round = function() {
+      var tiePile = []
+      var done = false
+      while(!done) {
+        var playerOnecard = this.playerOne.pop()
+        var playerTwocard = this.playerTwo.pop()
+        if (playerOnecard.rank > playerTwocard.rank) {
+          alert('Player one played a ' + playerOnecard.label() + ' and player two played a ' + 
+            playerTwocard.label() + '. Player one takes the cards')
+          this.playerOne.push(playerOnecard)
+          this.playerOne.push(playerTwocard)
+          this.playerOne.concat(tiePile)
+          tiePile = []
+          done = true
+
+        }
+        else if(playerOnecard.rank <  playerTwocard.rank) {
+          alert('Player one played a ' + playerOnecard.label() + 
+          ' and player two played a ' + playerTwocard.label() + '. Player two takes the cards')
+          this.playerTwo.push(playerOnecard)
+          this.playerTwo.push(playerTwocard)
+          this.playerTwo.concat(tiePile)
+          tiePile = []
+          done = true
+        }
+        else {alert('Player one played a ' + playerOnecard.label() + ' and player two played a ' + playerTwocard.label()
+         + '. It\'s a tie. Put down three cards each and try again.')
+          tiePile.push(this.playerOne.pop(), this.playerTwo.pop(), this.playerTwo.pop(), this.playerTwo.pop(), this.playerOne.pop(), this.playerOne.pop(),playerOnecard , playerTwocard)
+
+        }
+      }
+    }
+
+    this.play = function(){
+      var roundCount = 1
+      while(this.playerOne.length > 0 && this.playerTwo.length > 0){
+      this.round()
+        if(roundCount++ % 5 == 0) {
+          alert('player one currently has ' + this.playerOne.length + ' cards \n' 
+            + 'player two currently has ' + this.playerTwo.length + ' cards')
+        }
+      }
+    }
+
+    this.playerOne = this.dealOne(deck)
+    this.playerTwo = this.dealTwo(deck)
+  }
+  var d = new Deck();
+  d.init();
+  var w = new War(d)
+  w.play()
+    
+    //console.log(playerTwo.pop())
   
 
-  d.init();
-  //d.cards[Math.floor(Math.random() * 52)]
-  console.log(d.shuffle())
-  d.cards
-  var playerOne = d.dealOne()
-  var playerTwo = d.dealTwo()
+
+  //while(this.cards.length > 0)
   
 
 
