@@ -33,7 +33,7 @@
     this.rank = rank;
     this.suit = suit;
         this.show = function() {
-            alert('You pulled a ' + numbers[this.rank - 1] + " of " + suitnames[this.suit - 1]);  
+            console.log('You pulled a ' + numbers[this.rank - 1] + " of " + suitnames[this.suit - 1]);  
         }
     this.label = function() {return numbers[this.rank - 1] + " of " + suitnames[this.suit - 1] 
     }    
@@ -51,11 +51,26 @@
     }
   
     this.dealTwo = function(deck) {
-      var playerTwo = [], midDeck, twoDeal
+      var midDeck, twoDeal
       midDeck = deck.cards.length / 2
       twoDeal = deck.cards.slice(midDeck, 52)
       return twoDeal 
     }
+
+    this.checkPop = function(cards){
+      if(cards.length > 0){
+        return cards.pop()
+      } else {
+        return null
+      }
+    }
+    
+    this.checkUnshift = function(cards, card){
+      if (card != null){ 
+        cards.unshift(card)
+      }
+    }
+      
 
     this.round = function() {
       var tiePile = []
@@ -64,38 +79,45 @@
         var playerOnecard = this.playerOne.pop()
         var playerTwocard = this.playerTwo.pop()
         if (playerOnecard.rank > playerTwocard.rank) {
-          alert('Player one played a ' + playerOnecard.label() + ' and player two played a ' + 
+          console.log('Player one played a ' + playerOnecard.label() + ' and player two played a ' + 
             playerTwocard.label() + '. Player one takes the cards')
-          this.playerOne.push(playerOnecard)
-          this.playerOne.push(playerTwocard)
-          this.playerOne.concat(tiePile)
+          this.playerOne.unshift(playerOnecard)
+          this.playerOne.unshift(playerTwocard)
+          this.playerOne = tiePile.concat(this.playerOne)
           tiePile = []
           done = true
 
         }
         else if(playerOnecard.rank <  playerTwocard.rank) {
-          alert('Player one played a ' + playerOnecard.label() + 
+          console.log('Player one played a ' + playerOnecard.label() + 
           ' and player two played a ' + playerTwocard.label() + '. Player two takes the cards')
-          this.playerTwo.push(playerOnecard)
-          this.playerTwo.push(playerTwocard)
-          this.playerTwo.concat(tiePile)
+          this.playerTwo.unshift(playerOnecard)
+          this.playerTwo.unshift(playerTwocard)
+          this.playerTwo = tiePile.concat(this.playerTwo)
           tiePile = []
           done = true
         }
-        else {alert('Player one played a ' + playerOnecard.label() + ' and player two played a ' + playerTwocard.label()
+        else {
+            console.log('Player one played a ' + playerOnecard.label() + ' and player two played a ' + playerTwocard.label()
          + '. It\'s a tie. Put down three cards each and try again.')
-          tiePile.push(this.playerOne.pop(), this.playerTwo.pop(), this.playerTwo.pop(), this.playerTwo.pop(), this.playerOne.pop(), this.playerOne.pop(),playerOnecard , playerTwocard)
-
+          this.checkUnshift(tiePile, this.checkPop(this.playerOne))
+          this.checkUnshift(tiePile, this.checkPop(this.playerOne))
+          this.checkUnshift(tiePile, this.checkPop(this.playerOne))
+          this.checkUnshift(tiePile, this.checkPop(this.playerTwo))
+          this.checkUnshift(tiePile, this.checkPop(this.playerTwo))
+          this.checkUnshift(tiePile, this.checkPop(this.playerTwo))
+          tiePile.push(playerOnecard, playerTwocard)
+           
+          } 
         }
       }
-    }
-
-    this.play = function(){
+    
+      this.play = function(){
       var roundCount = 1
       while(this.playerOne.length > 0 && this.playerTwo.length > 0){
       this.round()
         if(roundCount++ % 5 == 0) {
-          alert('player one currently has ' + this.playerOne.length + ' cards \n' 
+          console.log('player one currently has ' + this.playerOne.length + ' cards \n' 
             + 'player two currently has ' + this.playerTwo.length + ' cards')
         }
       }
