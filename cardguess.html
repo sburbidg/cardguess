@@ -71,7 +71,9 @@
       }
     }
       
-
+      var oneName = prompt('What shall I call you Player One?')
+      var twoName = prompt('What shall I call you Player Two')
+    
     this.round = function() {
       var tiePile = []
       var done = false
@@ -79,8 +81,8 @@
         var playerOnecard = this.playerOne.pop()
         var playerTwocard = this.playerTwo.pop()
         if (playerOnecard.rank > playerTwocard.rank) {
-          console.log('Player one played a ' + playerOnecard.label() + ' and player two played a ' + 
-            playerTwocard.label() + '. Player one takes the cards')
+          console.log( oneName + ' played a ' + playerOnecard.label() + ' and ' + twoName + ' played a ' + 
+            playerTwocard.label() + '. ' + oneName + ' takes the cards.')
           this.playerOne.unshift(playerOnecard)
           this.playerOne.unshift(playerTwocard)
           this.playerOne = tiePile.concat(this.playerOne)
@@ -88,9 +90,7 @@
           done = true
 
         }
-        else if(playerOnecard.rank <  playerTwocard.rank) {
-          console.log('Player one played a ' + playerOnecard.label() + 
-          ' and player two played a ' + playerTwocard.label() + '. Player two takes the cards')
+        else if(playerOnecard.rank <  playerTwocard.rank) {console.log(oneName + ' played a ' + playerOnecard.label() + ' and ' + twoName + ' played a ' + playerTwocard.label() + '. ' + twoName + ' takes the cards.');
           this.playerTwo.unshift(playerOnecard)
           this.playerTwo.unshift(playerTwocard)
           this.playerTwo = tiePile.concat(this.playerTwo)
@@ -98,16 +98,14 @@
           done = true
         }
         else {
-            console.log('Player one played a ' + playerOnecard.label() + ' and player two played a ' + playerTwocard.label()
-         + '. It\'s a tie. Put down three cards each and try again.')
+            console.log(oneName + ' played a ' + playerOnecard.label() + ' and ' + twoName + ' played a ' +  playerTwocard.label() + '. It\'s a tie. Put down three cards each and try again.');
           this.checkUnshift(tiePile, this.checkPop(this.playerOne))
           this.checkUnshift(tiePile, this.checkPop(this.playerOne))
           this.checkUnshift(tiePile, this.checkPop(this.playerOne))
           this.checkUnshift(tiePile, this.checkPop(this.playerTwo))
           this.checkUnshift(tiePile, this.checkPop(this.playerTwo))
           this.checkUnshift(tiePile, this.checkPop(this.playerTwo))
-          tiePile.push(playerOnecard, playerTwocard)
-           
+          tiePile.push(playerOnecard, playerTwocard);
           } 
         }
       }
@@ -115,13 +113,22 @@
       this.play = function(){
       var roundCount = 1
       while(this.playerOne.length > 0 && this.playerTwo.length > 0){
-      this.round()
-        if(roundCount++ % 5 == 0) {
-          console.log('player one currently has ' + this.playerOne.length + ' cards \n' 
-            + 'player two currently has ' + this.playerTwo.length + ' cards')
+        this.round()
+          if(roundCount++ % 5 == 0) {
+            console.log(oneName + ' currently has ' + this.playerOne.length + ' cards. ' 
+              + twoName + ' currently has ' + this.playerTwo.length + ' cards')
+            }
+          } 
+         
+        if(this.playerOne.length < 0) {
+          console.log(oneName + ' wins!!')
+        } 
+        else {
+          console.log(twoName +  ' wins!')
         }
       }
-    }
+      
+    
 
     this.playerOne = this.dealOne(deck)
     this.playerTwo = this.dealTwo(deck)
