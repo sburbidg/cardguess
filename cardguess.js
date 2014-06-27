@@ -72,15 +72,17 @@ this.checkUnshift = function(cards, card){
   }
 }
   
-  var oneName = prompt('What shall I call you Player One?')
-  var twoName = prompt('What shall I call you Player Two')
+  var oneName = $("#nameone").val()
+  var twoName = $("#nametwo").val()
 
 this.round = function() {
   var tiePile = []
   var done = false
   while(!done && this.playerOne.length > 0 && this.playerTwo.length > 0) {
     var playerOnecard = this.playerOne.pop()
+    $("#onecard").append("<p>" + playerOnecard.label() + "</p>")
     var playerTwocard = this.playerTwo.pop()
+     $("#twocard").append("<p>" + playerTwocard.label() + "</p>")
     if (playerOnecard.rank > playerTwocard.rank) {
       console.log( oneName + ' played a ' + playerOnecard.label() + ' and ' + twoName + ' played a ' + playerTwocard.label() + '. ' + oneName + ' takes the cards.')
       this.playerOne.unshift(playerOnecard)
@@ -123,11 +125,11 @@ this.round = function() {
      
     if(this.playerOne.length > this.playerTwo.length) {
       console.log(oneName + ' wins!!')
-      $("#yes").append("<p>" + oneName + "wins!! </p>")
+      $("#yes").append($("#nameone").val())
     } 
     else if(this.playerOne.length < this.playerTwo.length) {
       console.log(twoName +  ' wins!')
-      $("#yes").append("<p>" + twoName + "wins!! </p>")
+      $("#yes").append($("#nameone").val())
     }
   }
   
