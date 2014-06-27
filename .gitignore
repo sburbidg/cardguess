@@ -1,1 +1,19 @@
 jquery-2.1.1.min.js
+<<<<<<< HEAD
+=======
+initializr/.htaccess
+initializr/404.html
+initializr/apple-touch-icon-precomposed.png
+initializr/crossdomain.xml
+initializr/favicon.ico
+initializr/humans.txt
+initializr/index.html
+initializr/robots.txt
+initializr/css/main.css
+initializr/css/normalize.css
+initializr/css/normalize.min.css
+initializr/js/main.js
+initializr/js/plugins.js
+initializr/js/vendor/jquery-1.11.0.min.js
+initializr/js/vendor/modernizr-2.6.2.min.js
+>>>>>>> warish

@@ -3,15 +3,6 @@
     <head>
       <meta charset="UTF-8"></meta>
       <script src="jquery-2.1.1.min.js"></script> 
-    </head>
-
-    <body>
-      <title>
-        'Classic game of war'
-      </title>
-      <header>
-        A game of war
-      </header>
       <script>
         var suitnames = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
         var numbers = ['Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 
@@ -138,9 +129,11 @@
                
               if(this.playerOne.length > this.playerTwo.length) {
                 console.log(oneName + ' wins!!')
+                $("#yes").append("<p>" + oneName + "wins!! </p>")
               } 
               else if(this.playerOne.length < this.playerTwo.length) {
                 console.log(twoName +  ' wins!')
+                $("#yes").append("<p>" + twoName + "wins!! </p>")
               }
             }
             
@@ -149,13 +142,35 @@
           this.playerOne = this.dealOne(deck)
           this.playerTwo = this.dealTwo(deck)
         }
-        var d = new Deck();
-        d.init();
-        var w = new War(d)
-        w.play()
-          
+        function RUN() {
+          d = new Deck();
+          d.init();
+          var w = new War(d)
+          w.play()
+      }
+      
+      $(document).ready(function(){
+        $("#btn1").click(function(){
+          RUN()
+        });
+      });
+      
+      // $(document).ready(function(){
+      //   RUN() 
+      // });
+       </script>    
+    </head>
 
-      </script>
+    <body>
+      <title>
+        'Classic game of war'
+      </title>
+      <header>
+        A game of war
+      </header>
+      <button id="btn1">Play Game</button>
+
+      <p id="yes">
 
     </body>
    </html> 
