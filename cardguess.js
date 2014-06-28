@@ -112,19 +112,21 @@ function War(deck) {
     var roundCount = 1
     while(this.playerOne.length > 0 && this.playerTwo.length > 0){
       this.round()
-        if(roundCount++ % 5 == 0) {
-          console.log(oneName + ' currently has ' + this.playerOne.length + ' cards. ' 
-            + twoName + ' currently has ' + this.playerTwo.length + ' cards')
+        if(roundCount++ % 1 == 0) {
+          $("#onecardnum").append(this.playerOne.length)
+          $("#twocardnum").append(this.playerTwo.length)
+          // console.log(oneName + ' currently has ' + this.playerOne.length + ' cards. ' 
+          //   + twoName + ' currently has ' + this.playerTwo.length + ' cards')
           }
         } 
        
       if(this.playerOne.length > this.playerTwo.length) {
         console.log(oneName + ' wins!!')
-        $("#yes").append($("#nameone").val())
+        $("#yes").append($("#nameone").val() + " wins!!!!")
       } 
       else if(this.playerOne.length < this.playerTwo.length) {
         console.log(twoName +  ' wins!')
-        $("#yes").append($("#nameone").val())
+        $("#yes").append($("#nametwo").val() + " wins!!!!")
       }
     }
     
@@ -142,7 +144,8 @@ function RUN() {
 
 $(document).ready(function(){
   $("#btn1").click(function(){
-  RUN()
+    $("div").hide();
+    RUN()
   });
 });
 
