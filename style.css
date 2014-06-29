@@ -1,9 +1,9 @@
 h1, div, h3 {
-    text-align: center;
+  text-align: center;
 }
-div1 {
-  text-align: left;
+btn2 {
+  display: none;  
 }
-div2 {
-  text-align: right;
-}
+/*p2 {
+  text-align: right; vertical-align:text-top;
+}*/

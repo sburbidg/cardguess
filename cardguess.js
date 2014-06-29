@@ -11,18 +11,19 @@ function Deck() {
 
   this.init = function() {
     for (r =  1; r <= 13; r++) {
-      for (s = 1; s <= 4; s++) 
-        {this.cards.push(new Card(s, r))
+      for (s = 1; s <= 4; s++) {
+        this.cards.push(new Card(s, r))
         }
     }
-    this.shuffle(); };
+    this.shuffle()
+  };
 
   this.shuffle = function() {
     var copy = [], n = this.cards.length, rand, take;
     while (n) {
       rand = Math.floor(Math.random() * n--);
       take = this.cards.splice(rand, 1)[0];
-      copy.push(take);
+      copy.push(take)
     }
     return this.cards = copy;
   }
@@ -31,9 +32,9 @@ function Deck() {
 function Card(suit, rank) {
   this.rank = rank;
   this.suit = suit;
-    this.show = function() {
-      console.log('You pulled a ' + numbers[this.rank - 1] + " of " + suitnames[this.suit - 1])
-    };
+  this.show = function() {
+    console.log('You pulled a ' + numbers[this.rank - 1] + " of " + suitnames[this.suit - 1])
+  };
   this.label = function() {return numbers[this.rank - 1] + " of " + suitnames[this.suit - 1]
   };
 };
@@ -70,14 +71,18 @@ function War(deck) {
   var oneName = $("#nameone").val()
   var twoName = $("#nametwo").val()
 
-  this.round = function() {
+    this.round = function() {
     var tiePile = []
     var done = false
+    
     while(!done && this.playerOne.length > 0 && this.playerTwo.length > 0) {
       var playerOnecard = this.playerOne.pop()
-      $("#onecard").append("<p>" + playerOnecard.label() + "</p>")
+        $("#onecardnum ").append(this.playerOne.length)
+        $("#onecard").append("<p>" + playerOnecard.label() + "</p>")
       var playerTwocard = this.playerTwo.pop()
-       $("#twocard").append("<p>" + playerTwocard.label() + "</p>")
+        $("#twocardnum ").append(this.playerTwo.length)
+        $("#twocard").append("<p>" + playerTwocard.label() + "</p>")
+      
       if (playerOnecard.rank > playerTwocard.rank) {
         console.log( oneName + ' played a ' + playerOnecard.label() + ' and ' + twoName + ' played a ' + playerTwocard.label() + '. ' + oneName + ' takes the cards.')
         this.playerOne.unshift(playerOnecard)
@@ -87,7 +92,7 @@ function War(deck) {
         done = true
 
       }
-      else if(playerOnecard.rank <  playerTwocard.rank) {console.log(oneName + ' played a ' + playerOnecard.label() + ' and ' + twoName + ' played a ' + playerTwocard.label() + '. ' + twoName + ' takes the cards.');
+      else if (playerOnecard.rank <  playerTwocard.rank) {
         this.playerTwo.unshift(playerOnecard)
         this.playerTwo.unshift(playerTwocard)
         this.playerTwo = tiePile.concat(this.playerTwo)
@@ -104,23 +109,37 @@ function War(deck) {
         this.checkUnshift(tiePile, this.checkPop(this.playerTwo))
         this.checkUnshift(tiePile, this.checkPop(this.playerTwo));
 
+
         } 
       }
     }
+  
 
-    this.play = function(){
-    var roundCount = 1
-    while(this.playerOne.length > 0 && this.playerTwo.length > 0){
-      this.round()
-        if(roundCount++ % 1 == 0) {
-          $("#onecardnum").append(this.playerOne.length)
-          $("#twocardnum").append(this.playerTwo.length)
-          // console.log(oneName + ' currently has ' + this.playerOne.length + ' cards. ' 
-          //   + twoName + ' currently has ' + this.playerTwo.length + ' cards')
-          }
-        } 
+    // this.play = function(){
+    // var roundCount = 1
+    // while(this.playerOne.length > 0 && this.playerTwo.length > 0){
+    //   this.round()
+    //   if(roundCount++ % 1 == 0) {
+    //     $("#onecardnum ").append(this.playerOne.length)
+    //     $("#twocardnum ").append(this.playerTwo.length)
+    //     // console.log(oneName + ' currently has ' + this.playerOne.length + ' cards. ' 
+    //     //   + twoName + ' currently has ' + this.playerTwo.length + ' cards')
+    //     }
+    //   } 
        
-      if(this.playerOne.length > this.playerTwo.length) {
+    //   if(this.playerOne.length > this.playerTwo.length) {
+    //     console.log(oneName + ' wins!!')
+    //     $("#yes").append($("#nameone").val() + " wins!!!!")
+    //   } 
+    //   else if(this.playerOne.length < this.playerTwo.length) {
+    //     console.log(twoName +  ' wins!')
+    //     $("#yes").append($("#nametwo").val() + " wins!!!!")
+    //   }
+    // }
+this.roundcount = 1 
+this.playoneround = function(){this.round()     
+  if(this.roundCount++ % 1 == 0) 
+   if(this.playerOne.length > this.playerTwo.length) {
         console.log(oneName + ' wins!!')
         $("#yes").append($("#nameone").val() + " wins!!!!")
       } 
@@ -129,26 +148,32 @@ function War(deck) {
         $("#yes").append($("#nametwo").val() + " wins!!!!")
       }
     }
-    
-
 
   this.playerOne = this.dealOne(deck)
   this.playerTwo = this.dealTwo(deck)
 }
-function RUN() {
+// function RUN() {
+//   var d = new Deck();
+//   d.init();
+//   var w = new War(d)
+//   w.play()
+//}
+
+var d, w
+$(document).ready(function(){
   d = new Deck();
   d.init();
-  var w = new War(d)
-  w.play()
-}
-
-$(document).ready(function(){
+  w = new War(d)
+  $("btn2").load().hide()
   $("#btn1").click(function(){
-    $("div").hide();
-    RUN()
+    $("div").hide()
+    $("btn2").show()
   });
-});
 
+  $("#btn2").click(function(){
+    w.playoneround()
+  })
+ }) 
 // $(document).ready(function(){
 //   RUN() 
 // });
