@@ -164,12 +164,9 @@ $(document).ready(function(){
   d = new Deck();
   d.init();
   w = new War(d)
-  $("btn2").load().hide()
   $("#btn1").click(function(){
-    $("div").hide()
-    $("btn2").show()
+    $("#start").hide()
   });
-
   $("#btn2").click(function(){
     w.playoneround()
   })
