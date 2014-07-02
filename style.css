@@ -1,8 +1,5 @@
-h1, div, h3 {
+body {
   text-align: center;
-}
-btn2 {
-  display: none;  
 }
 game{
   margin-left: auto;
@@ -10,10 +7,11 @@ game{
   width: 75%;
   background-color: #b0e0e6
 }
-table {margin-left: auto;
-       margin-right: auto;
-       width: 50%;
-       background-color: #b0e0e6
+table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  background-color: #b0e0e6
 }  
 /*p2 {
   text-align: right; vertical-align:text-top;
