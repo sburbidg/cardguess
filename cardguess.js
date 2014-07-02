@@ -56,7 +56,11 @@ function War(deck) {
 
   this.checkPop = function(cards){
     if(cards.length > null){
-      return cards.pop()
+      return cards.pop()        
+        $("#onecardnum ").append(this.playerOne.length)
+        $("#onecard").append("<p>" + playerOnecard.label() + "</p>")
+        $("#twocardnum ").append(this.playerTwo.length)
+        $("#twocard").append("<p>" + playerTwocard.label() + "</p>")
     } else {
       return null
 
@@ -77,16 +81,16 @@ function War(deck) {
     
     while(!done && this.playerOne.length > 0 && this.playerTwo.length > 0) {
       var playerOnecard = this.playerOne.pop()
-        $("#onecardnum ").append(this.playerOne.length)
-        $("#onecard").append("<p>" + playerOnecard.label() + "</p>")
       var playerTwocard = this.playerTwo.pop()
-        $("#twocardnum ").append(this.playerTwo.length)
-        $("#twocard").append("<p>" + playerTwocard.label() + "</p>")
-      
+
       if (playerOnecard.rank > playerTwocard.rank) {
         console.log( oneName + ' played a ' + playerOnecard.label() + ' and ' + twoName + ' played a ' + playerTwocard.label() + '. ' + oneName + ' takes the cards.')
         this.playerOne.unshift(playerOnecard)
         this.playerOne.unshift(playerTwocard)
+        $("#onecardnum ").append(this.playerOne.length)
+        $("#onecard").append("<p>" + playerOnecard.label() + "</p>")
+        $("#twocardnum ").append(this.playerTwo.length)
+        $("#twocard").append("<p>" + playerTwocard.label() + "</p>")
         this.playerOne = tiePile.concat(this.playerOne)
         tiePile = []
         done = true
@@ -95,6 +99,10 @@ function War(deck) {
       else if (playerOnecard.rank <  playerTwocard.rank) {
         this.playerTwo.unshift(playerOnecard)
         this.playerTwo.unshift(playerTwocard)
+        $("#onecardnum ").append(this.playerOne.length)
+        $("#onecard").append("<p>" + playerOnecard.label() + "</p>")
+        $("#twocardnum ").append(this.playerTwo.length)
+        $("#twocard").append("<p>" + playerTwocard.label() + "</p>")
         this.playerTwo = tiePile.concat(this.playerTwo)
         tiePile = []
         done = true
@@ -102,6 +110,10 @@ function War(deck) {
       else {
           console.log(oneName + ' played a ' + playerOnecard.label() + ' and ' + twoName + ' played a ' +  playerTwocard.label() + '. It\'s a tie. Put down three cards each and try again.');
         tiePile.push(playerOnecard, playerTwocard)
+        $("#onecardnum ").append(this.playerOne.length)
+        $("#onecard").append("<p>" + playerOnecard.label() + "</p>")
+        $("#twocardnum ").append(this.playerTwo.length)
+        $("#twocard").append("<p>" + playerTwocard.label() + "</p>")
         this.checkUnshift(tiePile, this.checkPop(this.playerOne))
         this.checkUnshift(tiePile, this.checkPop(this.playerOne))
         this.checkUnshift(tiePile, this.checkPop(this.playerOne))
@@ -138,7 +150,8 @@ function War(deck) {
     // }
 this.roundcount = 1 
 this.playoneround = function(){this.round()     
-  if(this.roundCount++ % 1 == 0) 
+  if(this.roundCount++ % 1 == 0)
+
    if(this.playerOne.length > this.playerTwo.length) {
         console.log(oneName + ' wins!!')
         $("#yes").append($("#nameone").val() + " wins!!!!")
@@ -165,10 +178,10 @@ $(document).ready(function(){
   d.init();
   w = new War(d)
   $("#btn1").click(function(){
-    $("#start").hide()
-  });
-  $("#btn2").click(function(){
+    $("#start").hide();
+      $("#btn2").click(function(){
     w.playoneround()
+    });
   })
  }) 
 // $(document).ready(function(){
