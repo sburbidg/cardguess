@@ -3,6 +3,8 @@ var suitnames = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
 var numbers = ['Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight',
     'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace'];
 
+
+
 function Deck() {
   this.cards = [];
   this.count = function() {
@@ -165,12 +167,6 @@ this.playoneround = function(){this.round()
   this.playerOne = this.dealOne(deck)
   this.playerTwo = this.dealTwo(deck)
 }
-// function RUN() {
-//   var d = new Deck();
-//   d.init();
-//   var w = new War(d)
-//   w.play()
-//}
 
 var d, w
 $(document).ready(function(){
@@ -179,11 +175,13 @@ $(document).ready(function(){
   w = new War(d)
   $("#btn1").click(function(){
     $("#start").hide();
-      $("#btn2").click(function(){
-    w.playoneround()
+    $("#btn2").click(function(){
+    w.playoneround(function(){
+      $('#table tr').slice(1).remove()
+    })
     });
   })
- }) 
+}) 
 // $(document).ready(function(){
 //   RUN() 
 // });
