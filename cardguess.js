@@ -2,7 +2,10 @@
 var suitnames = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
 var numbers = ['Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight',
     'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace'];
-var cardImages = [[cards/51.png, cards/47.png, cards/43.png, cards/39.png, cards/35.png, cards/31.png, cards/27.png, cards/23.png, cards/19.png, cards/15.png, cards/11.png, cards/7.png, cards/3.png], [ cards/52.png, cards/48.png, cards/44.png, cards/40.png, cards/36.png, cards/32.png, cards/28.png, cards/24.png, cards/20.png, cards/16.png, cards/12.png, cards/8.png, cards/4.png], [cards/50.png, cards/46.png, cards/42.png, cards/38.png, cards/34.png, cards/30.png, cards/26.png, cards/22.png, cards/18.png, cards/14.png, cards/10.png, cards/6.png, cards/2.png], [cards/49.png, cards/45.png, cards/41.png, cards/37.png, cards/33.png, cards/29.png, cards/25.png, cards/21.png, cards/17.png, cards/13.png, cards/9.png, cards/5.png, cards/1.png]]
+var cardImages = [['cards/51.png', 'cards/47.png', 'cards/43.png', 'cards/39.png', 'cards/35.png', 'cards/31.png', 'cards/27.png', 'cards/23.png', 'cards/19.png', 'cards/15.png', 'cards/11.png', 'cards/7.png', 'cards/3.png'], 
+  ['cards/52.png', 'cards/48.png', 'cards/44.png', 'cards/40.png', 'cards/36.png', 'cards/32.png', 'cards/28.png', 'cards/24.png', 'cards/20.png', 'cards/16.png', 'cards/12.png', 'cards/8.png', 'cards/4.png'], 
+  ['cards/50.png', 'cards/46.png', 'cards/42.png', 'cards/38.png', 'cards/34.png', 'cards/30.png', 'cards/26.png', 'cards/22.png', 'cards/18.png', 'cards/14.png', 'cards/10.png', 'cards/6.png', 'cards/2.png'], 
+  ['cards/49.png', 'cards/45.png', 'cards/41.png', 'cards/37.png', 'cards/33.png', 'cards/29.png', 'cards/25.png', 'cards/21.png', 'cards/17.png', 'cards/13.png', 'cards/9.png', 'cards/5.png', 'cards/1.png']]
 
 
 function Deck() {
@@ -32,14 +35,16 @@ function Deck() {
 }
 
 function Card(suit, rank) {
-  cardImages[suit][rank]
   this.rank = rank;
   this.suit = suit;
   this.show = function() {
     console.log('You pulled a ' + numbers[this.rank - 1] + " of " + suitnames[this.suit - 1])
   };
-  this.cardImages = function() {return cardImages[this.suit - 1][this.rank - 1]
+  this.imagePath = function() {return cardImages[this.suit - 1][this.rank - 1]
+
   };
+  this.label = function() {return numbers[this.rank - 1] + " of " + suitnames[this.suit - 1]
+  }
 };
 
 function War(deck) {
@@ -61,9 +66,9 @@ function War(deck) {
     if(cards.length > null){
       return cards.pop()        
         $("#onecardnum ").append(this.playerOne.length)
-        $("#onecard").append("<p>" + playerOnecard.label() + "</p>")
+        $("#onecard").append("<p>" + playerOnecard.imagePath() + "</p>")
         $("#twocardnum ").append(this.playerTwo.length)
-        $("#twocard").append("<p>" + playerTwocard.label() + "</p>")
+        $("#twocard").append("<p>" + playerTwocard.imagePath() + "</p>")
     } else {
       return null
 
@@ -81,48 +86,58 @@ function War(deck) {
     this.round = function() {
     var tiePile = []
     var done = false
+      $("#tieOne").replaceWith('<td id="tieOne"></td>')
+      $("#tieTwo").replaceWith('<td id="tieTwo"></td>')
     
     while(!done && this.playerOne.length > 0 && this.playerTwo.length > 0) {
       var playerOnecard = this.playerOne.pop()
       var playerTwocard = this.playerTwo.pop()
 
       if (playerOnecard.rank > playerTwocard.rank) {
-        console.log( oneName + ' played a ' + playerOnecard.label() + ' and ' + twoName + ' played a ' + playerTwocard.label() + '. ' + oneName + ' takes the cards.')
+
         this.playerOne.unshift(playerOnecard)
         this.playerOne.unshift(playerTwocard)
+
         $("#onecardnum ").text(this.playerOne.length)
-        $("#onecard").text(playerOnecard.label())
+        $("#onecard").replaceWith('<td id="onecard"><img src="' + playerOnecard.imagePath() + '"/></td>')
         $("#twocardnum ").text(this.playerTwo.length)
-        $("#twocard").text(playerTwocard.label())
+        $("#twocard").replaceWith('<td id="twocard"><img src="' + playerTwocard.imagePath() + '"/></td>')
         this.playerOne = tiePile.concat(this.playerOne)
         tiePile = []
         done = true
+        
 
       }
       else if (playerOnecard.rank <  playerTwocard.rank) {
+
         this.playerTwo.unshift(playerOnecard)
         this.playerTwo.unshift(playerTwocard)
+
         $("#onecardnum ").text(this.playerOne.length)
-        $("#onecard").text(playerOnecard.label())
+        $("#onecard").replaceWith('<td id="onecard"><img src="' + playerOnecard.imagePath() + '"/></td>')
         $("#twocardnum ").text(this.playerTwo.length)
-        $("#twocard").text(playerTwocard.label())
+        $("#twocard").replaceWith('<td id="twocard"><img src="' + playerTwocard.imagePath() + '"/></td>')
         this.playerTwo = tiePile.concat(this.playerTwo)
         tiePile = []
         done = true
+        
       }
       else {
-          console.log(oneName + ' played a ' + playerOnecard.label() + ' and ' + twoName + ' played a ' +  playerTwocard.label() + '. It\'s a tie. Put down three cards each and try again.');
+        console.log("tie")
         tiePile.push(playerOnecard, playerTwocard)
         $("#onecardnum ").text(this.playerOne.length)
-        $("#onecard").text("<p>" + playerOnecard.label() + "</p>")
+        $("#onecard").replaceWith('<td id="onecard"><img src="' + playerOnecard.imagePath() + '"/></td>')
         $("#twocardnum ").text(this.playerTwo.length)
-        $("#twocard").text("<p>" + playerTwocard.label() + "</p>")
+        $("#twocard").replaceWith('<td id="twocard"><img src="' + playerTwocard.imagePath() + '"/></td>')
+        $("#tieOne").replaceWith('<td id="tieOne"><img src="cards/b2fv.png"></img></td>')
+        $("#tieTwo").replaceWith('<td id="tieTwo"><img src="cards/b2fv.png"></img></td>')
         this.checkUnshift(tiePile, this.checkPop(this.playerOne))
         this.checkUnshift(tiePile, this.checkPop(this.playerOne))
         this.checkUnshift(tiePile, this.checkPop(this.playerOne))
         this.checkUnshift(tiePile, this.checkPop(this.playerTwo))
         this.checkUnshift(tiePile, this.checkPop(this.playerTwo))
-        this.checkUnshift(tiePile, this.checkPop(this.playerTwo));
+        this.checkUnshift(tiePile, this.checkPop(this.playerTwo))
+        ;
 
 
         } 
@@ -154,13 +169,10 @@ function War(deck) {
   this.roundcount = 1 
   this.playoneround = function(){this.round()     
     if(this.roundCount++ % 1 == 0)
-
-     if(this.playerOne.length > this.playerTwo.length) {
-          console.log(oneName + ' wins!!')
+     if(this.playerTwo.length == 0) {
           $("#yes").append($("#nameone").val() + " wins!!!!")
       } 
-        else if(this.playerOne.length < this.playerTwo.length) {
-          console.log(twoName +  ' wins!')
+        else if(this.playerOne.length == 0) {
           $("#yes").append($("#nametwo").val() + " wins!!!!")
     }
   }
@@ -175,7 +187,7 @@ $(document).ready(function(){
   d.init();
   w = new War(d)
   $("#btn1").click(function(){
-    $("#start").hide();
+    $(".start").hide();
     $("#btn2").click(function(){
     w.playoneround()
     });
