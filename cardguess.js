@@ -187,11 +187,13 @@ $(document).ready(function(){
   d.init();
   w = new War(d)
   $("#btn1").click(function(){
-    $(".start").fadeOut(),
-    $(".game").fadeIn()
+    $(".start").slideUp("slow"),
+    $(".game").fadeIn("fast")
     });
   $("#btn2").click(function(){
-  w.playoneround()
+  w.playoneround() 
+  $("#nameon").text($("#nameone").val())
+  $("#nametw").text($("#nametwo").val())
   });
 }) 
 // $(document).ready(function(){
