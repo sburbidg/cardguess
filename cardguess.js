@@ -86,8 +86,10 @@ function War(deck) {
     this.round = function() {
     var tiePile = []
     var done = false
-      $("#tieOne").replaceWith('<td id="tieOne"></td>')
-      $("#tieTwo").replaceWith('<td id="tieTwo"></td>')
+    $("#deckOne").replaceWith('<td id="deckOne"><img src="cards/b2fv.png"></img></td>')
+    $("#deckTwo").replaceWith('<td id="deckTwo"><img src="cards/b2fv.png"></img></td>')
+    $("#tieOne").replaceWith('<td id="tieOne"></td>')
+    $("#tieTwo").replaceWith('<td id="tieTwo"></td>')
     
     while(!done && this.playerOne.length > 0 && this.playerTwo.length > 0) {
       var playerOnecard = this.playerOne.pop()

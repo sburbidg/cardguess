@@ -1,7 +1,7 @@
 body {
   text-align: center;
 }
-game{
+.game{
   margin-left: auto;
   margin-right: auto;
   width: 75%;
@@ -10,11 +10,11 @@ game{
 .game{
     display: none;
 }
-table {
-  margin-left: auto;
-  margin-right: auto;
+playArea{
+  margin-left: 50mm;
+  margin-right: 100mm;
   width: 50%;
-  background-color: #b0e0e6
+  /*background-color: #b0e0e6*/
 }  
 /*p2 {
   text-align: right; vertical-align:text-top;
