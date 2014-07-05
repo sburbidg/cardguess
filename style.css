@@ -7,6 +7,9 @@ game{
   width: 75%;
   background-color: #b0e0e6
 }
+.game{
+    display: none;
+}
 table {
   margin-left: auto;
   margin-right: auto;

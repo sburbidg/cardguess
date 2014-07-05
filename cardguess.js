@@ -187,11 +187,12 @@ $(document).ready(function(){
   d.init();
   w = new War(d)
   $("#btn1").click(function(){
-    $(".start").hide();
-    $("#btn2").click(function(){
-    w.playoneround()
+    $(".start").fadeOut(),
+    $(".game").fadeIn()
     });
-  })
+  $("#btn2").click(function(){
+  w.playoneround()
+  });
 }) 
 // $(document).ready(function(){
 //   RUN() 
