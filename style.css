@@ -1,21 +1,73 @@
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
 body {
   text-align: center;
-}
-.game{
   margin-left: auto;
   margin-right: auto;
-  width: 75%;
-  background-color: #b0e0e6
 }
-.game{
-    display: none;
-}
-playArea{
-  margin-left: 50mm;
-  margin-right: 100mm;
-  width: 50%;
-  /*background-color: #b0e0e6*/
-}  
+
+  .game{
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 700px;
+  background-color: #B0E0E6;
+  display: none;
+  max-height: 500px;
+  }
+    #btn2{
+      position: relative;
+      top: 14px;
+    }
+
+    #playArea{
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 700px;
+      max-height: 500px
+    }
+      .names{
+        position: relative;
+        max-width: 350px;
+        top: -15px;
+        left: 175px;
+      }
+          #nameon{
+            float: left;
+          }
+          #nametw{
+            float: right;
+          }
+      .cards{
+        position: relative;
+        top: 10px
+      }
+        .left{
+          position: relative;
+          max-width: 350px;
+          max-height: 200px;
+          float: left;
+        }
+          #deckOne{
+            float: left;
+          }
+          #onecardnum{
+            float: left;
+          }
+          #onecard{
+            float: left;
+          }
+        .right{
+          position: relative;
+          max-width: 350px;
+          max-height: 200px;
+          float: right;
+        }
+
+
 /*p2 {
   text-align: right; vertical-align:text-top;
 }*/

@@ -86,10 +86,10 @@ function War(deck) {
     this.round = function() {
     var tiePile = []
     var done = false
-    $("#deckOne").replaceWith('<td id="deckOne"><img src="cards/b2fv.png"></img></td>')
-    $("#deckTwo").replaceWith('<td id="deckTwo"><img src="cards/b2fv.png"></img></td>')
-    $("#tieOne").replaceWith('<td id="tieOne"></td>')
-    $("#tieTwo").replaceWith('<td id="tieTwo"></td>')
+    $("#deckOne").replaceWith('<div id="deckOne"><img src="cards/b2fv.png"></img></div>')
+    $("#deckTwo").replaceWith('<div id="deckTwo"><img src="cards/b2fv.png"></img></div>')
+    $("#tieOne").replaceWith('<div id="tieOne"></div>')
+    $("#tieTwo").replaceWith('<div id="tieTwo"></div>')
     
     while(!done && this.playerOne.length > 0 && this.playerTwo.length > 0) {
       var playerOnecard = this.playerOne.pop()
@@ -101,9 +101,9 @@ function War(deck) {
         this.playerOne.unshift(playerTwocard)
 
         $("#onecardnum ").text(this.playerOne.length)
-        $("#onecard").replaceWith('<td id="onecard"><img src="' + playerOnecard.imagePath() + '"/></td>')
+        $("#onecard").replaceWith('<div id="onecard"><img src="' + playerOnecard.imagePath() + '"/></div>')
         $("#twocardnum ").text(this.playerTwo.length)
-        $("#twocard").replaceWith('<td id="twocard"><img src="' + playerTwocard.imagePath() + '"/></td>')
+        $("#twocard").replaceWith('<div id="twocard"><img src="' + playerTwocard.imagePath() + '"/></div>')
         this.playerOne = tiePile.concat(this.playerOne)
         tiePile = []
         done = true
@@ -116,9 +116,9 @@ function War(deck) {
         this.playerTwo.unshift(playerTwocard)
 
         $("#onecardnum ").text(this.playerOne.length)
-        $("#onecard").replaceWith('<td id="onecard"><img src="' + playerOnecard.imagePath() + '"/></td>')
+        $("#onecard").replaceWith('<div id="onecard"><img src="' + playerOnecard.imagePath() + '"/></div>')
         $("#twocardnum ").text(this.playerTwo.length)
-        $("#twocard").replaceWith('<td id="twocard"><img src="' + playerTwocard.imagePath() + '"/></td>')
+        $("#twocard").replaceWith('<div id="twocard"><img src="' + playerTwocard.imagePath() + '"/></div>')
         this.playerTwo = tiePile.concat(this.playerTwo)
         tiePile = []
         done = true
@@ -128,11 +128,11 @@ function War(deck) {
         console.log("tie")
         tiePile.push(playerOnecard, playerTwocard)
         $("#onecardnum ").text(this.playerOne.length)
-        $("#onecard").replaceWith('<td id="onecard"><img src="' + playerOnecard.imagePath() + '"/></td>')
+        $("#onecard").replaceWith('<div id="onecard"><img src="' + playerOnecard.imagePath() + '"/></div>')
         $("#twocardnum ").text(this.playerTwo.length)
-        $("#twocard").replaceWith('<td id="twocard"><img src="' + playerTwocard.imagePath() + '"/></td>')
-        $("#tieOne").replaceWith('<td id="tieOne"><img src="cards/b2fv.png"></img></td>')
-        $("#tieTwo").replaceWith('<td id="tieTwo"><img src="cards/b2fv.png"></img></td>')
+        $("#twocard").replaceWith('<div id="twocard"><img src="' + playerTwocard.imagePath() + '"/></div>')
+        $("#tieOne").replaceWith('<div id="tieOne"><img src="cards/b2fv.png"></img></div>')
+        $("#tieTwo").replaceWith('<div id="tieTwo"><img src="cards/b2fv.png"></img></div>')
         this.checkUnshift(tiePile, this.checkPop(this.playerOne))
         this.checkUnshift(tiePile, this.checkPop(this.playerOne))
         this.checkUnshift(tiePile, this.checkPop(this.playerOne))
